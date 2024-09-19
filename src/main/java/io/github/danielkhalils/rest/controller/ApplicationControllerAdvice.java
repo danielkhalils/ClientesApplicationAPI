@@ -1,4 +1,4 @@
-package io.github.danielkhalils;
+package io.github.danielkhalils.rest.controller;
 
 import io.github.danielkhalils.rest.exception.ApiErrors;
 import org.springframework.http.HttpStatus;
