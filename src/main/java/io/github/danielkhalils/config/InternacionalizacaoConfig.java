@@ -1,4 +1,4 @@
-package io.github.danielkhalils.model.config;
+package io.github.danielkhalils.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

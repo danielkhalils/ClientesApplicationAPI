@@ -1,4 +1,4 @@
-package io.github.danielkhalils.rest;
+package io.github.danielkhalils.rest.controller;
 
 import io.github.danielkhalils.model.entity.Cliente;
 import io.github.danielkhalils.model.repository.ClientesRepository;
