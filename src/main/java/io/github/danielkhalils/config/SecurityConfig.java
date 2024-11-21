@@ -1,5 +1,7 @@
 package io.github.danielkhalils.config;
 
+import io.github.danielkhalils.rest.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,13 +20,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("daniel")
-                .password("123")
-                .roles("USER");
+                .userDetailsService(usuarioService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
