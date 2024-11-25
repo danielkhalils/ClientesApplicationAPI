@@ -2,6 +2,7 @@ package io.github.danielkhalils.rest.service;
 
 import io.github.danielkhalils.model.entity.Usuario;
 import io.github.danielkhalils.model.repository.UsuarioRepository;
+import io.github.danielkhalils.rest.exception.UsuarioCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +27,14 @@ public class UsuarioService implements UserDetailsService {
                 .password(usuario.getPassword())
                 .roles("USER")
                 .build();
+    }
+
+    public Usuario salvar(Usuario usuario) {
+        boolean exists = repository.existsByUsername(usuario.getUsername());
+        if (exists) {
+            throw new UsuarioCadastradoException(usuario.getUsername());
+        }
+        return repository.save(usuario);
     }
 
 }
