@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.List;
 
 @RestControllerAdvice
+@CrossOrigin(origins = "*")
 public class ApplicationControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -29,7 +31,7 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity handleResponseStatusException(ResponseStatusException ex) {
-        String mensagemErro = ex.getMessage();
+        String mensagemErro = ex.getReason();
         HttpStatus statusCode = ex.getStatus();
         ApiErrors apiErrors = new ApiErrors(mensagemErro);
         return new ResponseEntity(apiErrors, statusCode);
